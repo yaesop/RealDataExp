@@ -7,11 +7,11 @@ import matplotlib.colors as colors
 
 #x, y = np.random.rand(2, 100) * 4
 #hist, xedges, yedges = np.histogram2d(x, y, bins=15, range=[[5, 80], [5, 80]])
-name = sys.argv[1]
-model = sys.argv[2]
-position = sys.argv[3]
+
+model = sys.argv[1]
+position = sys.argv[2]
 result = []
-text_file = open("/home/yaesop/syn_result/output_"+model+"_"+position+"_"+name+".txt", "r")
+text_file = open("/home/yaesop/RealDataExp/Object-Detection-Metrics/output_"+position+"_"+model+"_wo_poles"+".txt", "r")
 lines = text_file.readlines()
 k = 0
 for line in lines:
@@ -21,14 +21,15 @@ for line in lines:
     k=k+1
 result = np.array(result, dtype=np.int)
 
-fig=plt.figure(figsize=(12, 11), dpi=180)
+
+fig=plt.figure(figsize=(6, 6), dpi=180)
 ax1=fig.add_subplot(111, projection='3d')
 
-ylabels = np.array([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80])
+ylabels = np.array([15, 20, 25, 30, 35, 40, 45, 50])
 
 #xlabels = np.flip(xlabels)
 ypos = np.arange(ylabels.shape[0])
-xlabels = np.array([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80])
+xlabels = np.array([15, 20, 25, 30, 35, 40, 45, 50])
 #xlabels = np.flip(ylabels)
 xpos = np.arange(xlabels.shape[0])
 
@@ -38,7 +39,7 @@ zpos=result
 zpos = zpos.ravel()
 
 dx=0.3
-dy=0.4
+dy=0.3
 dz=zpos
 
 ax1.w_xaxis.set_ticks(xpos + dx/5.)
@@ -62,7 +63,7 @@ colourMap = plt.cm.ScalarMappable(cmap=plt.cm.jet_r)
 colourMap.set_array(zpos)
 colourMap.set_clim(0,100)
 fig.colorbar(colourMap, shrink=0.4)
-plt.title(position+" position "+"yolo-"+model+" "+ name+'\n'+ "Average: "+str(sum(zpos)/256))
-plt.savefig('/home/yaesop/syn_result/'+model+'_'+position+'_'+name+'.png')
-print(model, " ", position," ", name,":", sum(zpos)/256)
+plt.title(position+" position "+"yolo-"+model+'\n'+ "Average: "+str(sum(zpos)/64))
+plt.savefig('/home/yaesop/real_result/'+model+'_'+position+'_wo_poles'+'.png')
+print(model, " ", position,":", sum(zpos)/64)
 #plt.show()

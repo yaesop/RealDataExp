@@ -14,7 +14,7 @@ print(args)
 #count = 0
 #vidcap = cv2.VideoCapture(pathIn)# create a folder to store extracted images
 import os
-folder = 'DTRA_png'  
+folder = 'DTRA_png_new'  
 #os.mkdir(folder)
 # use opencv to do the job
 import cv2
@@ -65,9 +65,9 @@ for section in range(6):
                 #cv2.rectangle(image, (bbox[curr][0], bbox[curr][1]), (bbox[curr][2], bbox[curr][3]), (0, 255, 0))
                 #print(v.split('/')[-1].split('.')[0].split('-'))
                 if len(v.split('/')[-1].split('.')[0].split('-')) ==  3:
-                    cv2.imwrite(args.pathOut + "DTRA_png/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
+                    cv2.imwrite(args.pathOut + "DTRA_png_new/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
                 else:
-                    cv2.imwrite(args.pathOut + "DTRA_png/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1] + '-'+ v.split('/')[-1].split('.')[0].split('-')[2]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
+                    cv2.imwrite(args.pathOut + "DTRA_png_new/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1] + '-'+ v.split('/')[-1].split('.')[0].split('-')[2]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
             print("capturing "+ str(count), " section:" , str(section))
             return hasFrames
         sec = 0
@@ -79,50 +79,14 @@ for section in range(6):
         bbox = []
         temp = []
         frame_num = int(v.split('/')[-1].split('.')[0].split('-')[-1]) + k
-        for i in data:
-            if len(i) == 1: 
-                ind = 0
-            else:
-                ind = 1
-            pos = i[ind]['category'].split('-')[-1]
-            x = i[ind]['x']
-            y = i[ind]['y']
-            height = i[ind]['height']
-            width = i[ind]['width']
-            temp.append(x)
-            temp.append(y)
-            temp.append(x+width)
-            temp.append(y+height)
-            bbox.append(temp)
-            temp = []
-
-            #print(frame_num)
-            if len(v.split('/')[-1].split('.')[0].split('-')) ==  3:
-                file1 = open(args.pathOut + "DTRA_gt/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-' + v.split('/')[-1].split('.')[0].split('-')[1]  + "_%d_%d.txt" % (frame_num , section), "w")
-            else:
-                file1 = open(args.pathOut + "DTRA_gt/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-' + v.split('/')[-1].split('.')[0].split('-')[1] + '-'+ v.split('/')[-1].split('.')[0].split('-')[2] + "_%d_%d.txt" % (frame_num , section), "w")
-            tmp = "person"
-            tmp+=" "
-            tmp += pos
-            tmp+=" "
-            tmp+= str(x+ xmin) 
-            tmp+=" "
-            tmp+= str(y+ ymin) 
-            tmp+=" "
-            tmp+= str(width)
-            tmp+=" "
-            tmp+= str(height)
-            file1.write(tmp)
-            tmp = ""
-            file1.close() #to change file access modes
-            k = k + 1
+        
         success = getFrame(sec, bbox, curr)
         while success:
             curr = curr + 1
             count = count + 1
             sec = sec + frameRate
             success = getFrame(sec, bbox, curr)
-            if count==299:
-                break
+            #if count==299:
+            #    break
     
 
