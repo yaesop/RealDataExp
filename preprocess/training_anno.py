@@ -14,7 +14,7 @@ print(args)
 #count = 0
 #vidcap = cv2.VideoCapture(pathIn)# create a folder to store extracted images
 import os
-folder = 'DTRA_png_training'  
+folder = 'DTRA_png'  
 #os.mkdir(folder)
 # use opencv to do the job
 import cv2
@@ -26,7 +26,9 @@ for vid in videos:
         vi.append(vid)
 
 curr = 0
+
 for section in range(6):
+    
     if section == 0:
         xmin = 0
         ymin = 0
@@ -61,20 +63,6 @@ for section in range(6):
         print(v)
         vidcap = cv2.VideoCapture(v)
         count = 0
-        def getFrame(sec, bbox, curr):
-            vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
-            hasFrames,image = vidcap.read()
-            if hasFrames:
-                frame_num = int(v.split('/')[-1].split('.')[0].split('-')[-1]) + count
-                len_num = len(v.split('-')[-1])
-                #cv2.rectangle(image, (bbox[curr][0], bbox[curr][1]), (bbox[curr][2], bbox[curr][3]), (0, 255, 0))
-                #print(v.split('/')[-1].split('.')[0].split('-'))
-                if len(v.split('/')[-1].split('.')[0].split('-')) ==  3:
-                    cv2.imwrite(args.pathOut + "DTRA_png_training/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
-                else:
-                    cv2.imwrite(args.pathOut + "DTRA_png_training/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1] + '-'+ v.split('/')[-1].split('.')[0].split('-')[2]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
-            print("capturing "+ str(count), " section:" , str(section))
-            return hasFrames
         sec = 0
         frameRate = 1/30 # Change this number to 1 for each 1 second
         f = open(v.replace(".mp4",".json"))
@@ -82,16 +70,44 @@ for section in range(6):
         #print(data)
         k = 0
         bbox = []
-        temp = []
-        frame_num = int(v.split('/')[-1].split('.')[0].split('-')[-1]) + k
         
-        success = getFrame(sec, bbox, curr)
-        while success:
-            curr = curr + 1
-            count = count + 1
-            sec = sec + frameRate
-            success = getFrame(sec, bbox, curr)
-            #if count==299:
-            #    break
+        for i in data:
+            standing_tmp = ""
+            frame_num = int(v.split('/')[-1].split('.')[0].split('-')[-1]) + k
+            #print("new i ") 
+            for ob in i:
+                #print("ob ",ob) 
+                if ob['category'].startswith('mannequin'):
+                    pos = ob['category'].split('-')[-1]
+                    #print(pos)
+                    if ob['x']> xmin and ob['y']> ymin and ob['x']+ ob['width']< xmax and ob['y']+ ob['height']< ymax:
+                        x = ob['x']
+                        y = ob['y']
+             
+                        height = ob['height']
+                        width = ob['width']
+                        standing_tmp+= '0'
+                        standing_tmp+=" "
+                        standing_tmp+= str((x- xmin + width/2)/640) 
+                        standing_tmp+=" "
+                        standing_tmp+= str((y- ymin + height/2)/640) 
+                        standing_tmp+=" "
+                        standing_tmp+= str(width/640)
+                        standing_tmp+=" "
+                        standing_tmp+= str(height/640)
+                        standing_tmp+="\n"
+                    
+            #print(standing_tmp)
+            if len(v.split('/')[-1].split('.')[0].split('-')) ==  3:
+                file1_s = open(args.pathOut + "training/labels/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-' + v.split('/')[-1].split('.')[0].split('-')[1]  + "_%d_%d.txt" % (frame_num , section), "x")
+            else:
+                file1_s = open(args.pathOut + "training/labels/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-' + v.split('/')[-1].split('.')[0].split('-')[1] + '-'+ v.split('/')[-1].split('.')[0].split('-')[2] + "_%d_%d.txt" % (frame_num , section), "x")
+            
+            file1_s.write(standing_tmp)
+            standing_tmp = ""
+            file1_s.close() #to change file access modes
+            
+            k = k + 1
+        
     
 
