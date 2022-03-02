@@ -21,7 +21,8 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 import yaml
-from PIL import ExifTags, Image, ImageOps
+from PIL import ExifTags, ImageOps
+import Image
 from torch.utils.data import Dataset
 from tqdm import tqdm
 
