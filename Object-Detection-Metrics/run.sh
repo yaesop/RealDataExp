@@ -27,7 +27,7 @@ for  altitude in 15 20 25 30 35 40 45 50  ; do
     cat tmp/output.txt >> output.txt
 done
 done
-    mv output.txt output_${position}_${model}_wo_poles.txt
+    mv output.txt output_${position}_${model}_trained.txt
     rm -rf output.txt
 done
 done 

@@ -6,13 +6,13 @@
 
 
 
-#for position in standing lying kneeling; do 
-#for mdl in n s m l x ; do  #nano small medium large; do
+for position in standing lying kneeling; do 
+for mdl in n s m l x ; do  #nano small medium large; do
 
-#    python plotting.py $mdl $position
+    python plotting.py $mdl $position
 
-#done
-#done
+done
+done
 
 #for position in stand squat prone; do 
 #for mdl in n s m l x ; do  #nano small medium large; do

@@ -11,7 +11,7 @@ import matplotlib.colors as colors
 model = sys.argv[1]
 position = sys.argv[2]
 result = []
-text_file = open("/home/yaesop/RealDataExp/Object-Detection-Metrics/output_"+position+"_"+model+"_wo_poles"+".txt", "r")
+text_file = open("/home/yaesop/RealDataExp/Object-Detection-Metrics/output_"+position+"_"+model+"_trained"+".txt", "r")
 lines = text_file.readlines()
 k = 0
 for line in lines:
@@ -64,6 +64,6 @@ colourMap.set_array(zpos)
 colourMap.set_clim(0,100)
 fig.colorbar(colourMap, shrink=0.4)
 plt.title(position+" position "+"yolo-"+model+'\n'+ "Average: "+str(sum(zpos)/64))
-plt.savefig('/home/yaesop/real_result/'+model+'_'+position+'_wo_poles'+'.png')
+plt.savefig('/home/yaesop/real_result/'+model+'_'+position+'_trained'+'.png')
 print(model, " ", position,":", sum(zpos)/64)
 #plt.show()
