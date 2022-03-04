@@ -14,8 +14,8 @@ for  altitude in 15 20 25 30 35 40 45 50  ; do
     mkdir groundtruths
     rm -rf detections/
     mkdir detections
-    python detectionConvert_wo_pole.py $altitude $radius $model $position
-    #python detectionConvert.py $altitude $radius $model $position
+    #python detectionConvert_wo_pole.py $altitude $radius $model $position
+    python detectionConvert.py $altitude $radius $model $position
     cd ~/RealDataExp/Object-Detection-Metrics/detections
     for f in ./*.txt; do
         #echo "$f"

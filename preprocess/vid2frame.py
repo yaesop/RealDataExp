@@ -14,16 +14,16 @@ print(args)
 #count = 0
 #vidcap = cv2.VideoCapture(pathIn)# create a folder to store extracted images
 import os
-folder = 'DTRA_png_training'  
+folder = 'DTRA_png_new2'  
 #os.mkdir(folder)
 # use opencv to do the job
 import cv2
 videos = glob.glob(args.pathIn+ args.vidName +'/seq_mp4/*.mp4')
 videos.sort()
 vi = []
-for vid in videos:
-    if int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 601 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 2101 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 3601 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 3301 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 4501 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 5701 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 6601 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 8001 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 8901:
-        vi.append(vid)
+#for vid in videos:
+#    if int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 601 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 2101 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 3601 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 3301 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 4501 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 5701 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 6601 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 8001 or int(vid.split('/')[-1].split('.')[0].split('-')[-1]) == 8901:
+#        vi.append(vid)
 
 curr = 0
 for section in range(6):
@@ -57,7 +57,7 @@ for section in range(6):
         ymin = 440
         xmax = 1920
         ymax = 1080
-    for v in vi:
+    for v in videos:
         print(v)
         vidcap = cv2.VideoCapture(v)
         count = 0
@@ -70,9 +70,9 @@ for section in range(6):
                 #cv2.rectangle(image, (bbox[curr][0], bbox[curr][1]), (bbox[curr][2], bbox[curr][3]), (0, 255, 0))
                 #print(v.split('/')[-1].split('.')[0].split('-'))
                 if len(v.split('/')[-1].split('.')[0].split('-')) ==  3:
-                    cv2.imwrite(args.pathOut + "DTRA_png_training/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
+                    cv2.imwrite(args.pathOut + "DTRA_png_new2/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
                 else:
-                    cv2.imwrite(args.pathOut + "DTRA_png_training/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1] + '-'+ v.split('/')[-1].split('.')[0].split('-')[2]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
+                    cv2.imwrite(args.pathOut + "DTRA_png_new2/"+ v.split('/')[-1].split('.')[0].split('-')[0] + '-'+ v.split('/')[-1].split('.')[0].split('-')[1] + '-'+ v.split('/')[-1].split('.')[0].split('-')[2]  + "_%d_%d.png" % (frame_num , section), image[ymin:ymax, xmin:xmax]) # Save frame as PNG file   
             print("capturing "+ str(count), " section:" , str(section))
             return hasFrames
         sec = 0

@@ -6,10 +6,10 @@
 #mkdir kneeling
 #mkdir lying
 cd ~/RealDataExp/preprocess
-for vid in DTRA_Trial-10_CIR_VIS_15m_45deg_cam DTRA_Trial-11_CIR_VIS_20-25m_45deg_cam ; do  
-    #python vid2frame.py --pathIn /media/yaesop/ARL_FZNV/DTRA/ --pathOut /media/yaesop/ARL_FZNV/DTRA/ --vidName ${vid}
+for vid in DTRA_Trial-11_CIR_VIS_20-25m_45deg_cam ; do  
+    python vid2frame.py --pathIn /media/yaesop/ARL_FZNV/DTRA/ --pathOut /media/yaesop/ARL_FZNV/DTRA/ --vidName ${vid}
     #python annotations.py --pathIn /media/yaesop/ARL_FZNV/DTRA/ --pathOut /media/yaesop/ARL_FZNV/DTRA/ --vidName ${vid}
-    python training_anno.py --pathIn /media/yaesop/ARL_FZNV/DTRA/ --pathOut /media/yaesop/ARL_FZNV/DTRA/ --vidName ${vid}
+    #python training_anno.py --pathIn /media/yaesop/ARL_FZNV/DTRA/ --pathOut /media/yaesop/ARL_FZNV/DTRA/ --vidName ${vid}
 done 
 
 

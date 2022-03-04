@@ -8,8 +8,7 @@ position = sys.argv[4]
 selected = []
 data4al = []
 if altitude == "15":
-    dataset = glob.glob("/home/yaesop/real_result/detect_"+model+"_new/exp/labels/*.txt")
-    
+    dataset = glob.glob("/media/yaesop/ARL_FZNV/real_result/detect_"+model+"/exp/labels/*.txt")
     for data in dataset:
         if data.split("/")[-1].startswith("DTRA_Trial-10"):
             data4al.append(data)
@@ -31,8 +30,9 @@ if altitude == "15":
             selected.append(res)
         elif radius == str(15) and  frame_num > 8700 and frame_num < 9200 :
             selected.append(res)
+
 elif altitude == "20":
-    dataset = glob.glob("/home/yaesop/real_result/detect_"+model+"/exp/labels/*.txt")
+    dataset = glob.glob("/media/yaesop/ARL_FZNV/real_result/detect_"+model+"/exp/labels/*.txt")
     for data in dataset:
         if data.split("/")[-1].startswith("DTRA_Trial-11"):
             data4al.append(data)
@@ -55,7 +55,7 @@ elif altitude == "20":
         elif radius == str(15) and  frame_num > 8700 and frame_num < 9400 :
             selected.append(res)
 elif altitude == "25":
-    dataset = glob.glob("/home/yaesop/real_result/detect_"+model+"/exp/labels/*.txt")
+    dataset = glob.glob("/media/yaesop/ARL_FZNV/real_result/detect_"+model+"/exp/labels/*.txt")
     for data in dataset:
         if data.split("/")[-1].startswith("DTRA_Trial-5"):
             data4al.append(data)
@@ -78,7 +78,7 @@ elif altitude == "25":
         elif radius == str(15) and  frame_num > 8700 and frame_num < 9400 :
             selected.append(res)
 elif altitude == "30":
-    dataset = glob.glob("/home/yaesop/real_result/detect_"+model+"/exp/labels/*.txt")
+    dataset = glob.glob("/media/yaesop/ARL_FZNV/real_result/detect_"+model+"/exp/labels/*.txt")
     for data in dataset:
         if data.split("/")[-1].startswith("DTRA_Trial-6"):
             data4al.append(data)
@@ -101,7 +101,7 @@ elif altitude == "30":
         elif radius == str(15) and  frame_num > 8700 and frame_num < 9300 :
             selected.append(res)
 elif altitude == "35":
-    dataset = glob.glob("/home/yaesop/real_result/detect_"+model+"/exp/labels/*.txt")
+    dataset = glob.glob("/media/yaesop/ARL_FZNV/real_result/detect_"+model+"/exp/labels/*.txt")
     for data in dataset:
         if data.split("/")[-1].startswith("DTRA_Trial-6"):
             data4al.append(data)
@@ -127,7 +127,7 @@ elif altitude == "35":
         elif radius == str(15) and  frame_num > 11600 and frame_num < 12200 :
             selected.append(res)
 elif altitude == "40":
-    dataset = glob.glob("/home/yaesop/real_result/detect_"+model+"/exp/labels/*.txt")
+    dataset = glob.glob("/media/yaesop/ARL_FZNV/real_result/detect_"+model+"/exp/labels/*.txt")
     for data in dataset:
         if data.split("/")[-1].startswith("DTRA_Trial-8"):
             data4al.append(data)
@@ -150,7 +150,7 @@ elif altitude == "40":
         elif radius == str(15) and  frame_num > 8800 and frame_num < 9400 :
             selected.append(res)
 elif altitude == "45":
-    dataset = glob.glob("/home/yaesop/real_result/detect_"+model+"/exp/labels/*.txt")
+    dataset = glob.glob("/media/yaesop/ARL_FZNV/real_result/detect_"+model+"/exp/labels/*.txt")
     for data in dataset:
         if data.split("/")[-1].startswith("DTRA_Trial-8"):
             data4al.append(data)
@@ -176,7 +176,7 @@ elif altitude == "45":
         elif radius == str(15) and  frame_num > 11600 and frame_num < 12200 :
             selected.append(res)
 elif altitude == "50":
-    dataset = glob.glob("/home/yaesop/real_result/detect_"+model+"/exp/labels/*.txt")
+    dataset = glob.glob("/media/yaesop/ARL_FZNV/real_result/detect_"+model+"/exp/labels/*.txt")
     for data in dataset:
         if data.split("/")[-1].startswith("DTRA_Trial-9"):
             data4al.append(data)
